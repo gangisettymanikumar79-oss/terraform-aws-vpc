@@ -79,10 +79,9 @@ variable "nat_gateway_tags" {
     default = {}
 }
 variable "is_peering_required" {
-    default = false
-    type = bool
-  
-}
+     type    = bool
+     default = false
+   }
 
 variable "vpc_peering_tags" {
     default = {}
