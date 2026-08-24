@@ -63,7 +63,7 @@ resource "aws_subnet" "database" {
   tags = merge(
     local.common_tags,
     {
-      Name = "${local.common_name}-private-${split("-", local.az_name[count.index])[2]}"
+      Name = "${local.common_name}-database-${split("-", local.az_name[count.index])[2]}"
     }
   )
 }
@@ -148,7 +148,7 @@ resource "aws_nat_gateway" "main" {
 resource "aws_route" "public" {
   route_table_id            = aws_route_table.public.id
   destination_cidr_block    = "0.0.0.0/0"
- nat_gateway_id = aws_nat_gateway.main.id
+ gateway_id = aws_internet_gateway.main.id
 }
 resource "aws_route" "private" {
   route_table_id            = aws_route_table.private.id
