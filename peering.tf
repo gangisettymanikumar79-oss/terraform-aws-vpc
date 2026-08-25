@@ -14,7 +14,7 @@ resource "aws_vpc_peering_connection" "default" {
     var.vpc_peering_tags,
     local.common_tags,
     {
-      Name ="${local.common_name}-defalut"
+      Name ="${local.common_name}-default"
     }
   )
 }

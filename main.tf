@@ -22,16 +22,16 @@ resource "aws_internet_gateway" "main" {
 resource "aws_subnet" "public" {
   count = length(var.public_subnet_cidrs)
 
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = var.public_subnet_cidrs[count.index]
-  availability_zone       = local.az_names[count.index]
+  vpc_id  = aws_vpc.main.id
+  cidr_block = var.public_subnet_cidrs[count.index]
+  availability_zone = local.az_names[count.index]
   map_public_ip_on_launch = true
 
   tags = merge(
     var.public_subnet_tags,
     local.common_tags,
     {
-      Name = "${local.common_name}-public-${split("-", local.az_names[count.index])[2]}"
+        Name = "${local.common_name}-public-${split("-", local.az_names[count.index])[2]}"
     }
   )
 }
@@ -39,16 +39,16 @@ resource "aws_subnet" "public" {
 resource "aws_subnet" "private" {
   count = length(var.private_subnet_cidrs)
 
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = var.private_subnet_cidrs[count.index]
-  availability_zone       = local.az_names[count.index] #us-east-1a
+  vpc_id  = aws_vpc.main.id
+  cidr_block = var.private_subnet_cidrs[count.index]
+  availability_zone = local.az_names[count.index] #us-east-1a
   map_public_ip_on_launch = false
 
   tags = merge(
     var.private_subnet_tags,
     local.common_tags,
     {
-      Name = "${local.common_name}-private-${split("-", local.az_names[count.index])[2]}"
+        Name = "${local.common_name}-private-${split("-", local.az_names[count.index])[2]}"
     }
   )
 }
@@ -57,16 +57,16 @@ resource "aws_subnet" "private" {
 resource "aws_subnet" "database" {
   count = length(var.database_subnet_cidrs)
 
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = var.database_subnet_cidrs[count.index]
-  availability_zone       = local.az_names[count.index] #us-east-1a
+  vpc_id  = aws_vpc.main.id
+  cidr_block = var.database_subnet_cidrs[count.index]
+  availability_zone = local.az_names[count.index] #us-east-1a
   map_public_ip_on_launch = false
 
   tags = merge(
      var.database_subnet_tags,
     local.common_tags,
     {
-      Name = "${local.common_name}-database-${split("-", local.az_names[count.index])[2]}"
+        Name = "${local.common_name}-database-${split("-", local.az_names[count.index])[2]}"
     }
   )
 }
@@ -80,7 +80,7 @@ resource "aws_route_table" "public" {
     var.public_route_table_tags,
     local.common_tags,
     {
-        Name = "${local.common_name}-public"
+          Name = "${local.common_name}-public"
     }
   )
 }
